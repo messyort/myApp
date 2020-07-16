@@ -37,6 +37,7 @@ export class MenuComponent implements OnInit {
   onSelectItem(e){
     this.selectItem = e;
     if(e.children) e.collapse = !e.collapse; 
+    console.log(this.menuItemss)
   }
 
 }
