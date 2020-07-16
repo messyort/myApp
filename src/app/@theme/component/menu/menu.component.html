@@ -1,0 +1,36 @@
+<div class="menu-items" *ngFor="let item of menuItemss">
+    <ng-container *ngIf="item?.children;else oneItem">
+        <ng-container *ngTemplateOutlet="mutiItem"></ng-container>
+    </ng-container>
+    <ng-template #oneItem>
+        <a class="menu-item"  
+        [ngClass]="{'select':selectItem==item}"
+        (click)="onSelectItem(item)"
+        [routerLink]="[item.link]"
+        >
+        <mat-icon inline=true>{{item.icon}}</mat-icon>
+        {{item.title}}
+    </a>
+    </ng-template>
+    <ng-template #mutiItem>
+        <a class="menu-item"  
+        (click)="onSelectItem(item)"
+        >
+        <mat-icon inline=true>{{item.icon}}</mat-icon>
+        {{item.title}}
+        </a>
+        <ng-container *ngIf=item.collapse>
+            <div *ngFor="let childItem of item.children">
+                <a class="menu-item pl10"  
+                [ngClass]="{'select':selectItem==childItem}"
+                (click)="onSelectItem(childItem)"
+                [routerLink]="[childItem.link]"
+                >
+                <mat-icon inline=true>{{childItem.icon}}</mat-icon>
+                {{childItem.title}}
+                </a>
+            </div>
+        </ng-container>
+   
+    </ng-template>
+</div>

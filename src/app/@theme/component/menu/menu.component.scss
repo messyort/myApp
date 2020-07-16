@@ -1,0 +1,20 @@
+.menu-items{
+    a{text-decoration: none;}
+    border-right: 1px solid #dee2e6;
+    .menu-item{
+        border-bottom:1px solid #dee2e6 ;
+        color: #212529;
+        line-height: 18px;
+        &.select{
+            color: #007bff;
+        }
+        &:hover{
+            color: #007bff;
+            opacity: 0.6;
+        }
+    }
+}
+
+.pl10{
+    padding-left: 10px;
+}
