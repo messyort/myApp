@@ -4,6 +4,8 @@ import { AuthComponent } from './auth.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { ThemeModule } from '../@theme/theme.module';
+import { forbiddenNameValidator, ForbiddenValiditorDirective } from '../@theme/directive/forbidden-validitor.directive';
 
 
 
@@ -12,7 +14,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    FormsModule
+    FormsModule,
+    ThemeModule
   ]
 })
 export class AuthModule { }

@@ -44,6 +44,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {RouterModule} from '@angular/router';
+import { HighlightDirective } from './directive/highlight.directive';
+import { ConfirmValiditorDirective } from './directive/confirm-validitor.directive';
+import { ForbiddenValiditorDirective } from './directive/forbidden-validitor.directive';
 const materModule =[
   A11yModule,
   ClipboardModule,
@@ -89,15 +92,16 @@ const materModule =[
   PortalModule,
   ScrollingModule,
 ];
-const myAppComponents = [MenuComponent]
+const myAppComponents = [MenuComponent];
+const myAppDirectives = [HighlightDirective,ConfirmValiditorDirective,ForbiddenValiditorDirective]
 @NgModule({
-  declarations: [...myAppComponents],
+  declarations: [...myAppComponents, ...myAppDirectives],
   imports: [
     CommonModule,
     ...materModule,
     RouterModule
   ],
   exports:[...materModule
-    ,...myAppComponents]
+    ,...myAppComponents,...myAppDirectives]
 })
 export class ThemeModule { }

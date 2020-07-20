@@ -1,18 +1,26 @@
 <div class="container">
     <h2>Login</h2>
-    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" [hidden]= "submitted">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" [hidden]= "submitted" appConfirmInput>
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" [(ngModel)]="model.name" name="name" required 
-            #name="ngModel" >
-            <div [hidden]="name.valid || name.pristine"
-                class="alert alert-danger">
-            Name is required
-            </div>
+            <input type="text" class="form-control" id="name" [(ngModel)]="model.name" name="name" required minlength="4"
+            #name="ngModel" 
+            appForbiddenName="123@qq.com"
+            pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$"
+            >
+            <ng-container *ngTemplateOutlet="nameErrors"> </ng-container>
         </div>
         <div class="form-group">
+          <label for="confirmName">Confirm Name</label>
+          <input type="text" class="form-control" id="confirmName" [(ngModel)]="model.confirmName" name="confirmName" required minlength="4"
+          #confirmName="ngModel" 
+          appForbiddenName="123@qq.com"
+          pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$"
+          >
+      </div>
+        <div class="form-group">
             <label for="pwd">Password</label>
-            <input type="text" class="form-control" id="pwd" [(ngModel)]="model.password" name="password" required>
+            <input type="password" class="form-control" id="pwd" [(ngModel)]="model.password" name="password" required>
         </div>
         <div class="form-group">
             <label for="gender">Gender</label>
@@ -20,7 +28,7 @@
                 <option *ngFor="let gender of genders;let i = index" [value]="gender" >{{gender}}</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-success"  ngClass= "{'btn-disabled':!loginForm.valid}"  [disabled]="!loginForm.valid">Submit</button>
+        <button type="submit" class="btn btn-success"  ngClass= "{'btn-disabled':!loginForm.valid}"  [disabled]="false&&!loginForm.valid">Submit</button>
     </form>
     <div [hidden]="!submitted">
         <h2>You submitted the following:</h2>
@@ -40,3 +48,13 @@
         <button class="btn btn-primary" (click)="submitted=false">Edit</button>
       </div>
 </div>
+
+<ng-template #nameErrors>
+  <div style="min-height: 1rem;overflow: hidden;">
+    <div class="alert alert-danger" *ngIf=(name.errors?.required&&!name.pristine)>name is required</div>
+    <div class="alert alert-danger" *ngIf=!name.errors?.pattern&&name.errors?.minlength>minlenth is 4</div>
+    <div class="alert alert-danger" *ngIf=name.errors?.pattern>please input correct email format</div>
+    <div class="alert alert-danger" *ngIf=name.errors?.forbiddenName>this name is forbidden</div>
+  </div>
+  
+</ng-template>

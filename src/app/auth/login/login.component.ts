@@ -8,7 +8,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class LoginComponent implements OnInit {
   genders = ['male','female']
   @ViewChild('loginForm') loginForm
-  model = {name:'',password:'',gender:'male'};
+  model = {name:'',confirmName:'',password:'',gender:'male'};
   submitted = false 
   constructor() { }
 
