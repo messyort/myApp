@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -6,13 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm
-  model = {name:'',password:''};
+  genders = ['male','female']
+  @ViewChild('loginForm') loginForm
+  model = {name:'',password:'',gender:'male'};
+  submitted = false 
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  
+  onSubmit(){
+    console.log(this.loginForm)
+    // this.submitted = true;
+  }
 
 
   get diagnostic() { return JSON.stringify(this.model); }
